@@ -36,6 +36,9 @@ class ToggleSelectionSetByNumber(bpy.types.Operator):
     def execute(self, context):
         arm = context.object
         print('did it', self.index)
+        bpy.ops.pose.select_all(action='DESELECT')
+        arm.active_selection_set = self.index
+        bpy.ops.pose.selection_set_select()
         return { 'FINISHED' }
 
 
