@@ -1,4 +1,5 @@
 import bpy
+import addon_utils
 
 class SelectionSetTogglePanel(bpy.types.Panel):
     """Creates a Panel in the View 3D UI for toggling selectin sets."""
@@ -17,6 +18,10 @@ class SelectionSetTogglePanel(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
+        loaded, state = addon_utils.check('bone_selection_sets')
+        if not loaded:
+            return False
+
         return (context.object and
                 context.object.type == 'ARMATURE' and
                 context.mode == 'POSE')
