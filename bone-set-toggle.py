@@ -1,12 +1,13 @@
 import bpy
 
 class SelectionSetTogglePanel(bpy.types.Panel):
-    """Creates a Panel in the Object properties window"""
-    bl_label = "Hello World Panel"
+    """Creates a Panel in the View 3D UI for toggling selectin sets."""
+
     bl_idname = "OBJECT_PT_selection-set-toggle"
-    bl_space_type = 'PROPERTIES'
-    bl_region_type = 'WINDOW'
-    bl_context = "object"
+    bl_label = "Selection Set Toggle "
+    bl_options = {'DEFAULT_CLOSED'}
+    bl_region_type = "UI"
+    bl_space_type = "VIEW_3D"
 
     def draw(self, context):
         layout = self.layout
@@ -14,15 +15,17 @@ class SelectionSetTogglePanel(bpy.types.Panel):
         obj = context.object
 
         row = layout.row()
-        row.label(text="Hello world!", icon='WORLD_DATA')
+        row.label(text="Aru wor", icon='WORLD_DATA')
 
         row = layout.row()
         row.label(text="Active object is: " + obj.name)
         row = layout.row()
         row.prop(obj, "name")
 
-        row = layout.row()
-        row.operator("mesh.primitive_cube_add")
+
+    @classmethod
+    def poll(cls, context):
+        return True
 
 def register():
     bpy.utils.register_class(SelectionSetTogglePanel)
