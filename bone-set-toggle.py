@@ -13,7 +13,7 @@ class SelectionSetTogglePanel(bpy.types.Panel):
         layout = self.layout
         for selection_set in context.object.selection_sets:
             row = layout.row()
-            row.label(text="set: " + selection_set.name)
+            layout.operator("pose.toggle_selection_by_number", text=selection_set.name)
 
     @classmethod
     def poll(cls, context):
@@ -21,8 +21,23 @@ class SelectionSetTogglePanel(bpy.types.Panel):
                 context.object.type == 'ARMATURE' and
                 context.mode == 'POSE')
 
+class ToggleSelectionSetByNumber(bpy.types.Operator):
+    bl_idname = "pose.toggle_selection_by_number"
+    bl_label = "Toggle Selection Set"
+    bl_description = "Toggle selection set by number"
+    bl_options = {'UNDO', 'REGISTER'}
+
+    def execute(self, context):
+        arm = context.object
+        print('did it')
+        return { 'FINISHED' }
+
+
+
+
 def register():
     bpy.utils.register_class(SelectionSetTogglePanel)
+    bpy.utils.register_class(ToggleSelectionSetByNumber)
 
 def unregister():
     bpy.utils.unregister_class(SelectionSetTogglePanel)
