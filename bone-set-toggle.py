@@ -17,7 +17,9 @@ class SelectionSetTogglePanel(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        return len(context.object.selection_sets)
+        return (context.object and
+                context.object.type == 'ARMATURE' and
+                context.mode == 'POSE')
 
 def register():
     bpy.utils.register_class(SelectionSetTogglePanel)
