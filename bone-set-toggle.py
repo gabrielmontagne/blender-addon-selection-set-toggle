@@ -11,9 +11,9 @@ class SelectionSetTogglePanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        for selection_set in context.object.selection_sets:
+        for index, selection_set in enumerate(context.object.selection_sets):
             row = layout.row()
-            layout.operator("pose.toggle_selection_by_number", text=selection_set.name)
+            layout.operator("pose.toggle_selection_by_number", text=selection_set.name).index = index
 
     @classmethod
     def poll(cls, context):
@@ -27,9 +27,15 @@ class ToggleSelectionSetByNumber(bpy.types.Operator):
     bl_description = "Toggle selection set by number"
     bl_options = {'UNDO', 'REGISTER'}
 
+    index = bpy.props.IntProperty(
+        name="Active Selection Set",
+        description="Index of the currently active selection set",
+        default=0
+    )
+
     def execute(self, context):
         arm = context.object
-        print('did it')
+        print('did it', self.index)
         return { 'FINISHED' }
 
 
