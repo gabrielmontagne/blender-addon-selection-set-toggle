@@ -28,21 +28,17 @@ class ToggleSelectionSetByNumber(bpy.types.Operator):
     bl_options = {'UNDO', 'REGISTER'}
 
     index = bpy.props.IntProperty(
-        name="Active Selection Set",
+        name="Active Selection Index for Toggle",
         description="Index of the currently active selection set",
         default=0
     )
 
     def execute(self, context):
         arm = context.object
-        print('did it', self.index)
         bpy.ops.pose.select_all(action='DESELECT')
         arm.active_selection_set = self.index
         bpy.ops.pose.selection_set_select()
         return { 'FINISHED' }
-
-
-
 
 def register():
     bpy.utils.register_class(SelectionSetTogglePanel)
@@ -52,5 +48,4 @@ def unregister():
     bpy.utils.unregister_class(SelectionSetTogglePanel)
 
 if __name__ == "__main__":
-    print('main')
     register()
