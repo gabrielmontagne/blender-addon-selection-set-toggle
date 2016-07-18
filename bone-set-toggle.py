@@ -22,10 +22,9 @@ class SelectionSetTogglePanel(bpy.types.Panel):
         row = layout.row()
         row.prop(obj, "name")
 
-
     @classmethod
     def poll(cls, context):
-        return True
+        return len(context.object.selection_sets)
 
 def register():
     bpy.utils.register_class(SelectionSetTogglePanel)
