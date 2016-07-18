@@ -1,6 +1,16 @@
 import bpy
 import addon_utils
 
+bl_info = {
+    'name': 'Toggle Selection Sets from the Properties Panel',
+    'author': 'gabriel montagné, gabriel@tibas.london',
+    'version': (0, 0, 1),
+    'blender': (2, 77, 0),
+    'description': 'Adds buttons for switching to Selection Sets in Pose Mode',
+    'tracker_url': 'https://bitbucket.org/gabriel.montagne/blender-addon-selection-set-toggle/issues?status=new&status=open',
+    'category': 'Animation'
+}
+
 class SelectionSetTogglePanel(bpy.types.Panel):
     """Creates a Panel in the View 3D UI for toggling selection sets."""
 
