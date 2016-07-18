@@ -11,16 +11,9 @@ class SelectionSetTogglePanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-
-        obj = context.object
-
-        row = layout.row()
-        row.label(text="Aru wor", icon='WORLD_DATA')
-
-        row = layout.row()
-        row.label(text="Active object is: " + obj.name)
-        row = layout.row()
-        row.prop(obj, "name")
+        for selection_set in context.object.selection_sets:
+            row = layout.row()
+            row.label(text="set: " + selection_set.name)
 
     @classmethod
     def poll(cls, context):
