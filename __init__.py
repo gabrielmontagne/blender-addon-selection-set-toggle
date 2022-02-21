@@ -4,14 +4,14 @@ import addon_utils
 bl_info = {
     'name': 'Toggle Selection Sets from the Properties Panel',
     'author': 'gabriel montagné, gabriel@tibas.london',
-    'version': (0, 0, 1),
-    'blender': (2, 77, 0),
+    'version': (0, 0, 2),
+    'blender': (2, 80, 0),
     'description': 'Adds buttons for switching to Selection Sets in Pose Mode',
     'tracker_url': 'https://bitbucket.org/gabriel.montagne/blender-addon-selection-set-toggle/issues?status=new&status=open',
     'category': 'Animation'
 }
 
-class SelectionSetTogglePanel(bpy.types.Panel):
+class ANIM_PT_selection_set_toggle(bpy.types.Panel):
     """Creates a Panel in the View 3D UI for toggling selection sets."""
 
     bl_idname = 'OBJECT_PT_selection-set-toggle'
@@ -45,7 +45,7 @@ class SwitchToSelectionSet(bpy.types.Operator):
     bl_description = 'Toggle selection set by number'
     bl_options = {'UNDO', 'REGISTER'}
 
-    index = bpy.props.IntProperty(
+    index: bpy.props.IntProperty(
         name='Active Selection Index for Toggle',
         description='Index of the currently active selection set',
         default=0
@@ -59,11 +59,11 @@ class SwitchToSelectionSet(bpy.types.Operator):
         return { 'FINISHED' }
 
 def register():
-    bpy.utils.register_class(SelectionSetTogglePanel)
+    bpy.utils.register_class(ANIM_PT_selection_set_toggle)
     bpy.utils.register_class(SwitchToSelectionSet)
 
 def unregister():
-    bpy.utils.unregister_class(SelectionSetTogglePanel)
+    bpy.utils.unregister_class(ANIM_PT_selection_set_toggle)
 
 if __name__ == '__main__':
     register()
